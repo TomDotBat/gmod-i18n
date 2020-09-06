@@ -32,7 +32,7 @@ print(lang:getString("helloWorldNoName"))
 - **Q: Are pull requests welcomed?**
   - A: Yes! Feel free to improve on the code, add features to the library or fix any bugs I may not have found.
 
-# Global Functions
+# Global functions
 ## gmodI18n.registerAddon
 ```lua
 gmodI18n.registerAddon(identifier :: any, fallbackLang :: string, name :: string, author :: string, version :: number) :: addon
@@ -67,7 +67,7 @@ gmodI18n.getLanguageCode() :: string
 ```
 This function returns the language code that gmod-i18n is using to get language strings with. This is also affected by the `i18n_override_language` convar.
 
-# Language Metamethods
+# Language metamethods
 ## language:addPhrase
 ```lua
 language:addPhrase(identifier :: string, phrase :: string, fallbackData :: table) :: phrase
@@ -85,7 +85,7 @@ This returns a formed language string using the phrase specified.
 - The identifier is the identification string that was used to define the phrase you're trying to get.
 - The data should be an associative table with the placeholder being the key and the value being the fallback string. This is an optional argument.
 
-# Addon Metamethods
+# Addon metamethods
 ## addon:getString
 ```lua
 addon:getString(identifier :: string, data :: table) :: string
