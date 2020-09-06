@@ -142,5 +142,37 @@ function gmodI18n.getLanguageCode() --Gets the game's language code.
     return langCVar:GetString()
 end
 
+hook.Add("InitPostEntity", "gmodI18n.loadMessage", function() --Prints a nice message displaying information about the addons registered.
+    print([[                          _        _ __  ___        
+                         | |      (_)_ |/ _ \       
+ __ _ _ __ ___   ___   __| |______ _ | | (_) |_ __  
+/ _` | '_ ` _ \ / _ \ / _` |______| || |> _ <| '_ \ 
+ (_| | | | | | | (_) | (_| |      | || | (_) | | | |
+\__, |_| |_| |_|\___/ \__,_|      |_||_|\___/|_| |_|
+ __/ |                                              
+|___/                                               
+
+Developed by Tom.bat
+https://github.com/TomDotBat/gmod-i18n
+    ]])
+
+    for id, addn in pairs(gmodI18n._addons) do
+        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%f", addn.version) .. "), created by: " .. addn.author .. ".")
+
+        if table.Count(addn._languages) == 0 then
+            print("   No languages found for addon: " .. addn.name .. ".")
+            continue
+        end
+
+        for langCode, lang in pairs(addn._languages) do
+            print("   Language registered: " .. langCode .. " (v" .. string.format("%f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
+        end
+
+        print("\n")
+    end
+
+    print("[gmod-i18n] Successfully loaded with " .. table.Count(gmodI18n._addons) .. " addons registered.")
+end)
+
 hook.Run("gmodI18n.fullyLoaded") --Register your addon then load all of your language files that define phrases when this hook is called.
                                  --Alternatively, you can load this file in your addon first, before doing the above.
