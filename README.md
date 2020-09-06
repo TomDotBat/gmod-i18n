@@ -27,7 +27,7 @@ print(lang:getString("helloWorldNoName"))
   - A: In your console, enter `i18n_override_language {your preferred language code}`, if this doesn't work, the addon your using might not have a translation available for your desired language.
 - **Q: I'm having problems with the libary, where can I get help?**
   - A: Make an issue on this repository, clearly describing the issue you are having. Remember, this library is free for you to modify and use to your liking, so don't complain if it takes a long time to fix your problem.
-- **Q: I have a feature I'd have implemented, where should I post my idea?**
+- **Q: I have an idea I'd like to have implemented, where should I post my idea?**
   - A: If you know how to implement it yourself, feel free to make a pull request with the changes your feature idea requires. Otherwise, make an issue on this repository and your ideawill be considered.
 - **Q: Are pull requests welcomed?**
   - A: Yes! Feel free to improve on the code, add features to the library or fix any bugs I may not have found.
