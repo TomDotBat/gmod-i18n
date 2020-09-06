@@ -1,4 +1,13 @@
 
+--[[-------------------------------------------------------------------------
+Tom's i18n library - Making multi-language support for your addons easier.
+Created by Tom.bat (STEAM_0:0:127595314)
+Repository: https://github.com/TomDotBat/gmod-i18n
+Website: https://tomdotbat.dev
+Email: tom@tomdotbat.dev
+Discord: Tom.bat#0001
+---------------------------------------------------------------------------]]
+
 local ver = 1.0
 if gmodI18n and gmodI18n.version >= ver then return end --Load the latest copy of gmod-i18n available.
 
