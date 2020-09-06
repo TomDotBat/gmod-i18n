@@ -87,8 +87,8 @@ function addon:getString(...) --Returns a string built by the specified phrase, 
     local result = self._languages[lang]:getString(...)
     if result then return result end
 
-    if lang == fallbackLang then return "ERROR CODE: 3" end --Error code 3: Phrase not found in both specified langauge and fallback language.
-    if not self._languages[fallbackLang] then return "ERROR CODE: 4" end --Error code 4: Phrase not found in specified langauge, fallback language not found.
+    if lang == fallbackLang then return "ERROR CODE: 3" end --Error code 3: Phrase not found in both specified language and fallback language.
+    if not self._languages[fallbackLang] then return "ERROR CODE: 4" end --Error code 4: Phrase not found in specified language, fallback language not found.
 
     result = self._languages[fallbackLang]:getString(...)
     return result and result or "ERROR CODE: 3"
@@ -120,7 +120,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
     return tbl
 end
 
-function gmodI18n.registerLanguage(addonId, ...) --Creates a langauge for a specified addon, this creates a temporary addon if the specified one isn't created yet.
+function gmodI18n.registerLanguage(addonId, ...) --Creates a language for a specified addon, this creates a temporary addon if the specified one isn't created yet.
     local selectedAddon = gmodI18n._addons[addonId]
     if not selectedAddon then --"Half-register" an addon object so we can add our language. This will only happen if the language registration is called before the addon gets registered.
         selectedAddon = gmodI18n.registerAddon(addonId)
