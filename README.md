@@ -3,7 +3,7 @@ This library's purpose is to make multi-language support for your addons easier.
 
 # How to implement
 - Put the `sh_tom_i18n.lua` file in your addon somewhere (feel free to rename this), making sure your loader loads it before any language files you add.
-- Define your addon by calling [`gmodI18n.registerAddon`](google.com).
+- Define your addon by calling [`gmodI18n.registerAddon`](https://github.com/TomDotBat/gmod-i18n/tree/master#gmodi18nregisteraddon).
 - In your language files use a similar structure to this:
 ```lua
 local lang = gmodI18n.registerLanguage("myTestAddon", "en", "Tom.bat", 1)
@@ -22,7 +22,7 @@ print(lang:getString("helloWorldNoName"))
 
 # FAQ
 - **Q: All of my text says `ERROR CODE: {NO}`, what's causing this?**
-  - A: Reference the [error codes section](https://google.com).
+  - A: Reference the [error codes section](https://github.com/TomDotBat/gmod-i18n/tree/master#error-codes).
 - **Q: My game is using the wrong language, how do I fix this?**
   - A: In your console, enter `i18n_override_language {your preferred language code}`, if this doesn't work, the addon your using might not have a translation available for your desired language.
 - **Q: I'm having problems with the libary, where can I get help?**
