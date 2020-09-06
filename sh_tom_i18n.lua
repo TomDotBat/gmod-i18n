@@ -13,7 +13,7 @@ phrase.__index = phrase
 function phrase:getString(data)
     if not istable(data) then return self.string end
 
-    local replacements = table.Copy(self.fallbackData)
+    local replacements = self.fallbackData and table.Copy(self.fallbackData) or {}
     table.Merge(replacements, data)
 
     local result = self.string
