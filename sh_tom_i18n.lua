@@ -16,8 +16,6 @@ function phrase:getString(data)
     local replacements = table.Copy(self.fallbackData)
     table.Merge(replacements, data)
 
-    PrintTable(data)
-
     local result = self.string
     for placeholder, replacement in pairs(data) do --Loop through the given data and replace the placeholders with the provided replacement string.
         result = string.Replace(result, "#" .. placeholder, replacement)
