@@ -35,7 +35,7 @@ print(lang:getString("helloWorldNoName"))
 # Global Functions
 ## gmodI18n.registerAddon
 ```lua
-gmodI18n.registerAddon(identifier :: any, fallbackLang :: string, name :: string (nice name of the addon), author :: string, version :: number)
+gmodI18n.registerAddon(identifier :: any, fallbackLang :: string, name :: string (nice name of the addon), author :: string, version :: number) :: addon
 ```
 This registers an addon for usage with gmod-i18n. While calling this function isn't actually required, it is recommended so the correct information is shown on the loading message.
 - The identifier of the addon you are registering must be unique. You can identify it using any type of variable, but it is best to use a string.
@@ -63,14 +63,14 @@ This function is used for getting an addon object from a certain identifier.
 
 ## gmodI18n.getLanguageCode()
 ```lua
-gmodI18n.getLanguageCode()
+gmodI18n.getLanguageCode() :: string
 ```
 This function returns the language code that gmod-i18n is using to get language strings with. This is also affected by the `i18n_override_language` convar.
 
 # Language Metamethods
 ## language:addPhrase()
 ```lua
-language:addPhrase(identifier :: string, phrase :: string, fallbackData :: table)
+language:addPhrase(identifier :: string, phrase :: string, fallbackData :: table) :: phrase
 ```
 This creates and returns a phrase object and attaches it to the language object
 - The identifier should be a unique to the phrase.
@@ -79,7 +79,7 @@ This creates and returns a phrase object and attaches it to the language object
 
 ## language:getString()
 ```lua
-language:getString(identifier :: string, data :: table)
+language:getString(identifier :: string, data :: table) :: string
 ```
 This returns a formed language string using the phrase specified.
 - The identifier is the identification string that was used to define the phrase you're trying to get.
@@ -88,7 +88,7 @@ This returns a formed language string using the phrase specified.
 # Addon Metamethods
 ## addon:getString()
 ```lua
-addon:getString(identifier :: string, data :: table)
+addon:getString(identifier :: string, data :: table) :: string
 ```
 This will return a formed language string from an addon. This function should always return a string. The language is automatically determined by calling `gmodI18n.getLanguageCode()`.
 - The identifier is the identification string that was used to define the phrase you're trying to get.
