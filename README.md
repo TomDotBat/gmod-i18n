@@ -35,7 +35,7 @@ print(lang:getString("helloWorldNoName"))
 # Global Functions
 ## gmodI18n.registerAddon
 ```lua
-gmodI18n.registerAddon(identifier :: any, fallbackLang :: string, name :: string (nice name of the addon), author :: string, version :: number) :: addon
+gmodI18n.registerAddon(identifier :: any, fallbackLang :: string, name :: string, author :: string, version :: number) :: addon
 ```
 This registers an addon for usage with gmod-i18n. While calling this function isn't actually required, it is recommended so the correct information is shown on the loading message.
 - The identifier of the addon you are registering must be unique. You can identify it using any type of variable, but it is best to use a string.
@@ -61,14 +61,14 @@ gmodI18n.getAddon(addonId :: any) :: addon
 This function is used for getting an addon object from a certain identifier.
 - The addon ID should be the identifier of the addon you're trying to get.
 
-## gmodI18n.getLanguageCode()
+## gmodI18n.getLanguageCode
 ```lua
 gmodI18n.getLanguageCode() :: string
 ```
 This function returns the language code that gmod-i18n is using to get language strings with. This is also affected by the `i18n_override_language` convar.
 
 # Language Metamethods
-## language:addPhrase()
+## language:addPhrase
 ```lua
 language:addPhrase(identifier :: string, phrase :: string, fallbackData :: table) :: phrase
 ```
@@ -77,7 +77,7 @@ This creates and returns a phrase object and attaches it to the language object
 - The phrase should contain your translated sentence with placeholders. Placeholders start with a '#' and should be unique.
 - The fallback data should be an associative table with the placeholder being the key and the value being the fallback string. This is an optional argument.
 
-## language:getString()
+## language:getString
 ```lua
 language:getString(identifier :: string, data :: table) :: string
 ```
@@ -86,7 +86,7 @@ This returns a formed language string using the phrase specified.
 - The data should be an associative table with the placeholder being the key and the value being the fallback string. This is an optional argument.
 
 # Addon Metamethods
-## addon:getString()
+## addon:getString
 ```lua
 addon:getString(identifier :: string, data :: table) :: string
 ```
