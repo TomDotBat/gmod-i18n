@@ -54,7 +54,7 @@ end
 function language.new(identifier, author, version) --Creates a language object. Author and version are optional.
     local tbl = setmetatable({}, language)
 
-    tbl.identifier = identifier
+    tbl.identifier = tostring(identifier)
     tbl.author = tostring(author) or "Unknown"
     tbl.version = tonumber(version) or 0
 
