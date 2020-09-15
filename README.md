@@ -24,7 +24,7 @@ print(lang:getString("helloWorldNoName"))
 - **Q: All of my text says `ERROR CODE: {NO}`, what's causing this?**
   - A: Reference the [error codes section](https://github.com/TomDotBat/gmod-i18n/tree/master#error-codes).
 - **Q: My game is using the wrong language, how do I fix this?**
-  - A: In your console, enter `i18n_override_language {your preferred language code}`, if this doesn't work, the addon your using might not have a translation available for your desired language.
+  - A: In your console, enter `i18n_override_language {your preferred language code}`, if this doesn't work, the addon you're using might not have a translation available for your desired language.
 - **Q: I'm having problems with the libary, where can I get help?**
   - A: Make an issue on this repository, clearly describing the issue you are having. Remember, this library is free for you to modify and use to your liking, so don't complain if it takes a long time to fix your problem.
 - **Q: I have an idea I'd like to have implemented, where should I post my idea?**
