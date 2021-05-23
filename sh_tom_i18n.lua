@@ -63,8 +63,6 @@ end
 local language = {} --Define the language object, this stores all phrases for a specific language in an addon.
 language.__index = language
 
-language._phrases = {}
-
 function language:addPhrase(...) --Creates a new phrase, attaches it to this language and returns the created phrase object.
     local newPhrase = phrase.new(...)
     self._phrases[newPhrase.identifier] = newPhrase
@@ -82,6 +80,7 @@ function language.new(identifier, author, version) --Creates a language object. 
     tbl.identifier = tostring(identifier)
     tbl.author = tostring(author) or "Unknown"
     tbl.version = tonumber(version) or 0
+    tbl._phrases = {}
 
     return tbl
 end
@@ -89,8 +88,6 @@ end
 
 local addon = {} --Define the addon object, this stores all phrases for a specific addon.
 addon.__index = addon
-
-addon._languages = {}
 
 function addon:addLanguage(...) --This creates a language object and attaches it to this addon.
     local lang = language.new(...)
@@ -140,6 +137,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
     tbl.name = tostring(name) or "Unknown"
     tbl.author = tostring(author) or "Unknown"
     tbl.version = tonumber(version) or 0
+    tbl._languages = {}
 
     gmodI18n._addons[identifier] = tbl
     return tbl
