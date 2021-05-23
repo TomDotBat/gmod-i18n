@@ -24,7 +24,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ---------------------------------------------------------------------------]]
 
-local ver = 1.0
+local ver = 1.1
 if gmodI18n and gmodI18n.version >= ver then return end --Load the latest copy of gmod-i18n available.
 
 gmodI18n = {
