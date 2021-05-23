@@ -180,7 +180,7 @@ https://github.com/TomDotBat/gmod-i18n
     ]])
 
     for id, addn in pairs(gmodI18n._addons) do
-        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%f", addn.version) .. "), created by: " .. addn.author .. ".")
+        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%.2f", addn.version) .. "), created by: " .. addn.author .. ".")
 
         if table.Count(addn._languages) == 0 then
             print("   No languages found for addon: " .. addn.name .. ".")
@@ -188,7 +188,7 @@ https://github.com/TomDotBat/gmod-i18n
         end
 
         for langCode, lang in pairs(addn._languages) do
-            print("   Language registered: " .. langCode .. " (v" .. string.format("%f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
+            print("   Language registered: " .. langCode .. " (v" .. string.format("%.2f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
         end
 
         print("\n")
