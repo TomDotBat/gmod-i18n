@@ -79,7 +79,7 @@ function language.new(identifier, author, version) --Creates a language object. 
 
     tbl.identifier = tostring(identifier)
     tbl.author = tostring(author) or "Unknown"
-    tbl.version = tonumber(version) or 0
+    tbl.version = tostring(version) or "?.?.?"
     tbl._phrases = {}
 
     return tbl
@@ -126,7 +126,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
         existingAddon.fallbackLang = tostring(fallbackLang)
         existingAddon.name = tostring(name) or "Unknown"
         existingAddon.author = tostring(author) or "Unknown"
-        existingAddon.version = tonumber(version) or 0
+        existingAddon.version = tostring(version) or "?.?.?"
         return existingAddon
     end
 
@@ -136,7 +136,7 @@ function gmodI18n.registerAddon(identifier, fallbackLang, name, author, version)
     tbl.fallbackLang = tostring(fallbackLang)
     tbl.name = tostring(name) or "Unknown"
     tbl.author = tostring(author) or "Unknown"
-    tbl.version = tonumber(version) or 0
+    tbl.version = tostring(version) or "?.?.?"
     tbl._languages = {}
 
     gmodI18n._addons[identifier] = tbl
@@ -180,7 +180,7 @@ https://github.com/TomDotBat/gmod-i18n
     ]])
 
     for id, addn in pairs(gmodI18n._addons) do
-        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. string.format("%.2f", addn.version) .. "), created by: " .. addn.author .. ".")
+        print("[gmod-i18n] Addon registered: " .. addn.name .. " (v" .. addn.version .. "), created by: " .. addn.author .. ".")
 
         if table.Count(addn._languages) == 0 then
             print("   No languages found for addon: " .. addn.name .. ".")
@@ -188,7 +188,7 @@ https://github.com/TomDotBat/gmod-i18n
         end
 
         for langCode, lang in pairs(addn._languages) do
-            print("   Language registered: " .. langCode .. " (v" .. string.format("%.2f", lang.version) .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
+            print("   Language registered: " .. langCode .. " (v" .. lang.version .. "), created by: " .. lang.author .. ", " .. table.Count(lang._phrases) .. " phrases found.")
         end
 
         print("\n")
