@@ -39,15 +39,23 @@ do
         gmodLanguage = newValue
     end, "i18n.GModLanguage")
 
+    --- Gets the override language configured for translations.
+    --- @treturn string The override language string; "" means no override is set.
     function i18n.GetLanguage()
         return overrideLanguage
     end
 end
 
+--- @class Phrase
 local Phrase = {}
 Phrase.__index = Phrase
 Phrase._isPhrase = true
 do
+    --- Creates a new phrase.
+    --- @tparam string id The phrase identifier.
+    --- @tparam string template The phrase template.
+    --- @tparam[opt] table fallbacks Fallback replacements for template keys.
+    --- @treturn Phrase The created phrase.
     function Phrase.New(id, template, fallbacks)
         assert(isstring(id), "The phrase identifier must be a string.")
         assert(isstring(template), "The phrase template must be a string.")
@@ -60,19 +68,28 @@ do
         return phrase
     end
 
+    --- Gets the phrase identifier.
+    --- @treturn string The phrase identifier.
     function Phrase:GetIdentifier()
         return self._identifier
     end
 
+    --- Gets the phrase template.
+    --- @treturn string The phrase template.
     function Phrase:GetTemplate()
         return self._template
     end
 
+    --- Gets the fallback replacements for template keys.
+    --- @treturn table The fallback replacements.
     function Phrase:GetFallbacks()
         return self._fallbacks
     end
 
     local REPLACEMENT_PATTERN = "#(%w+)"
+    --- Builds the phrase string with replacements.
+    --- @tparam[opt] table replacements Replacement values keyed by token.
+    --- @treturn string The rendered phrase.
     function Phrase:GetString(replacements)
         if replacements then
             return self._template:gsub(REPLACEMENT_PATTERN, function(key)
@@ -84,10 +101,15 @@ do
     end
 end
 
+--- @class Translation
 local Translation = {}
 Translation.__index = Translation
 Translation._isTranslation = true
 do
+    --- Creates a new translation.
+    --- @tparam string language The language code.
+    --- @tparam[opt] string author The translation author.
+    --- @treturn Translation The created translation.
     function Translation.New(language, author)
         assert(isstring(language), "The translation language must be a string.")
         assert(isstring(author) or author == nil, "The translation author must be a string or nil.")
@@ -99,18 +121,28 @@ do
         return translation
     end
 
+    --- Gets the translation language.
+    --- @treturn string The language code.
     function Translation:GetLanguage()
         return self._language
     end
 
+    --- Gets the translation author.
+    --- @treturn string|nil The translation author.
     function Translation:GetAuthor()
         return self._author
     end
 
+    --- Gets the phrases for this translation.
+    --- @treturn table The phrase map keyed by identifier.
     function Translation:GetPhrases()
         return self._phrases
     end
 
+    --- Gets a translated string by phrase identifier.
+    --- @tparam string id The phrase identifier.
+    --- @tparam[opt] table replacements Replacement values keyed by token.
+    --- @treturn string|nil The translated string, or nil if not found in this translation.
     function Translation:GetString(id, replacements)
         local phrase = self._phrases[id]
         if phrase then
@@ -118,6 +150,11 @@ do
         end
     end
 
+    --- Adds a phrase to the translation.
+    --- @tparam Phrase|string phraseOrId Phrase instance or phrase identifier.
+    --- @tparam[opt] string template The phrase template when providing an identifier.
+    --- @tparam[opt] table fallbacks Fallback replacements when providing an identifier.
+    --- @treturn Phrase The added phrase.
     function Translation:AddPhrase(phraseOrId, template, fallbacks)
         local phrase
         if isstring(phraseOrId) then
@@ -132,10 +169,16 @@ do
     end
 end
 
+--- @class Addon
 local Addon = {}
 Addon.__index = Addon
 Addon._isAddon = true
 do
+    --- Creates a new addon container.
+    --- @tparam string name The addon name.
+    --- @tparam[opt] string author The addon author.
+    --- @tparam[opt] string fallbackLanguage The fallback language code.
+    --- @treturn Addon The created addon.
     function Addon.New(name, author, fallbackLanguage)
         assert(isstring(name), "The addon name must be a string.")
         assert(isstring(author) or author == nil, "The addon author must be a string or nil.")
@@ -149,32 +192,48 @@ do
         return addon
     end
 
+    --- Gets the addon name.
+    --- @treturn string The addon name.
     function Addon:GetName()
         return self._name
     end
 
+    --- Gets the addon author.
+    --- @treturn string|nil The addon author.
     function Addon:GetAuthor()
         return self._author
     end
 
+    --- Sets the addon author.
+    --- @tparam[opt] string author The addon author.
     function Addon:SetAuthor(author)
         assert(isstring(author) or author == nil, "The addon author must be a string or nil.")
         self._author = author
     end
 
+    --- Gets the fallback language code.
+    --- @treturn string The fallback language code.
     function Addon:GetFallbackLanguage()
         return self._fallbackLanguage
     end
 
+    --- Sets the fallback language code.
+    --- @tparam string fallbackLanguage The fallback language code.
     function Addon:SetFallbackLanguage(fallbackLanguage)
         assert(isstring(fallbackLanguage), "The addon fallback language must be a string.")
         self._fallbackLanguage = fallbackLanguage
     end
 
+    --- Gets the translations for this addon.
+    --- @treturn table The translation map keyed by language.
     function Addon:GetTranslations()
         return self._translations
     end
 
+    --- Gets a translated string by phrase identifier.
+    --- @tparam string id The phrase identifier.
+    --- @tparam[opt] table replacements Replacement values keyed by token.
+    --- @treturn string The translated string, or "#" .. id if not found in any language.
     function Addon:GetString(id, replacements)
         for i = overrideLanguage == "" and 2 or 1, 3 do
             local translation
@@ -203,8 +262,13 @@ do
 
         return "#" .. id
     end
+    --- Metamethod that delegates to Addon:GetString for convenient string resolution.
     Addon.__call = Addon.GetString
 
+    --- Adds a translation to the addon.
+    --- @tparam string language The language code.
+    --- @tparam[opt] string author The translation author.
+    --- @treturn Translation The created translation.
     function Addon:AddTranslation(language, author)
         local translation = Translation.New(language, author)
         self._translations[language] = translation
@@ -212,11 +276,19 @@ do
     end
 end
 
+--- Gets a registered addon by name.
+--- @tparam string name The addon name.
+--- @treturn Addon|nil The addon if registered, or nil if not found.
 function i18n.GetAddon(name)
     assert(isstring(name), "The addon name must be a string.")
     return i18n._addons[name]
 end
 
+--- Registers or updates an addon.
+--- @tparam string name The addon name.
+--- @tparam[opt] string author The addon author.
+--- @tparam[opt] string fallbackLanguage The fallback language code.
+--- @treturn Addon The registered addon.
 function i18n.RegisterAddon(name, author, fallbackLanguage)
     assert(isstring(name), "The addon name must be a string.")
 
@@ -232,6 +304,11 @@ function i18n.RegisterAddon(name, author, fallbackLanguage)
     return addon
 end
 
+--- Registers a translation for an addon.
+--- @tparam string addonName The addon name.
+--- @tparam string language The language code.
+--- @tparam[opt] string author The translation author.
+--- @treturn Translation The registered translation.
 function i18n.RegisterTranslation(addonName, language, author)
     local addon = i18n.GetAddon(addonName)
     if not addon then
