@@ -40,7 +40,7 @@ do
     end, "i18n.GModLanguage")
 
     --- Gets the override language configured for translations.
-    --- @treturn string The override language (empty string when unset).
+    --- @treturn string The override language string; "" means no override is set.
     function i18n.GetLanguage()
         return overrideLanguage
     end
@@ -233,7 +233,7 @@ do
     --- Gets a translated string by phrase identifier.
     --- @tparam string id The phrase identifier.
     --- @tparam[opt] table replacements Replacement values keyed by token.
-    --- @treturn string Always returns a string. Tries override, GMod, and fallback languages before "#" .. id.
+    --- @treturn string Tries override, GMod, and fallback languages before "#" .. id.
     function Addon:GetString(id, replacements)
         for i = overrideLanguage == "" and 2 or 1, 3 do
             local translation
@@ -281,7 +281,7 @@ end
 
 --- Gets a registered addon by name.
 --- @tparam string name The addon name.
---- @treturn[opt] Addon The addon if registered, or nil if not found.
+--- @treturn Addon|nil The addon if registered, or nil if not found.
 function i18n.GetAddon(name)
     assert(isstring(name), "The addon name must be a string.")
     return i18n._addons[name]
