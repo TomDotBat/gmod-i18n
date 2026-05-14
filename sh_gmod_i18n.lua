@@ -262,10 +262,7 @@ do
 
         return "#" .. id
     end
-    --- Metamethod that allows addon instances to be called to resolve strings.
-    --- @tparam string id The phrase identifier.
-    --- @tparam[opt] table replacements Replacement values keyed by token.
-    --- @treturn string The resolved string.
+    --- Metamethod that delegates to Addon:GetString for convenient string resolution.
     Addon.__call = Addon.GetString
 
     --- Adds a translation to the addon.
