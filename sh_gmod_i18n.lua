@@ -142,7 +142,7 @@ do
     --- Gets a translated string by phrase identifier.
     --- @tparam string id The phrase identifier.
     --- @tparam[opt] table replacements Replacement values keyed by token.
-    --- @treturn string|nil value The translated string, or nil when not found (no fallback).
+    --- @treturn string|nil value The translated string, or nil if not found in this translation.
     function Translation:GetString(id, replacements)
         local phrase = self._phrases[id]
         if phrase then
@@ -233,7 +233,7 @@ do
     --- Gets a translated string by phrase identifier.
     --- @tparam string id The phrase identifier.
     --- @tparam[opt] table replacements Replacement values keyed by token.
-    --- @treturn string value Always returns a string, using "#" .. id when no translation is found.
+    --- @treturn string value Always returns a string, trying override, GMod, and fallback languages before "#" .. id.
     function Addon:GetString(id, replacements)
         for i = overrideLanguage == "" and 2 or 1, 3 do
             local translation
