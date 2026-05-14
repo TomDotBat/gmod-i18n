@@ -233,7 +233,7 @@ do
     --- Gets a translated string by phrase identifier.
     --- @tparam string id The phrase identifier.
     --- @tparam[opt] table replacements Replacement values keyed by token.
-    --- @treturn string Tries override, GMod, and fallback languages before "#" .. id.
+    --- @treturn string The translated string, or "#" .. id if not found in any language.
     function Addon:GetString(id, replacements)
         for i = overrideLanguage == "" and 2 or 1, 3 do
             local translation
@@ -262,7 +262,7 @@ do
 
         return "#" .. id
     end
-    --- Allows addon instances to be called to resolve strings.
+    --- Metamethod that allows addon instances to be called to resolve strings.
     --- @tparam string id The phrase identifier.
     --- @tparam[opt] table replacements Replacement values keyed by token.
     --- @treturn string The resolved string.
