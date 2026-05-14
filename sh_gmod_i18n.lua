@@ -233,7 +233,7 @@ do
     --- Gets a translated string by phrase identifier.
     --- @tparam string id The phrase identifier.
     --- @tparam[opt] table replacements Replacement values keyed by token.
-    --- @treturn string value Always returns a string, trying override, GMod, and fallback languages before "#" .. id.
+    --- @treturn string value Always returns a string. Tries override, GMod, and fallback languages before "#" .. id.
     function Addon:GetString(id, replacements)
         for i = overrideLanguage == "" and 2 or 1, 3 do
             local translation
@@ -281,7 +281,7 @@ end
 
 --- Gets a registered addon by name.
 --- @tparam string name The addon name.
---- @treturn[opt] Addon addon The addon if registered.
+--- @treturn[opt] Addon addon The addon if registered, or nil if not found.
 function i18n.GetAddon(name)
     assert(isstring(name), "The addon name must be a string.")
     return i18n._addons[name]
